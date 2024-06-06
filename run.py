@@ -1,5 +1,6 @@
-from download_datasets import download_hugging_face_sentences, save_sentences_to_files, get_sentences
-from preprocessing import tokenize_sentences
+from src.download_datasets import download_hugging_face_sentences, save_sentences_to_files, get_sentences
+from src.preprocessing import tokenize_sentences
+
 
 def build_dataset():
     english_sentences, italian_sentences = download_hugging_face_sentences()
@@ -14,7 +15,7 @@ def build_dataset():
     assert len(english_sentences) == len(italian_sentences)
     print(f"Downloaded {len(english_sentences)} sentence")
 
+
 if __name__ == '__main__':
     english_sentences, italian_sentences = get_sentences()
     tokenize_sentences(english_sentences, italian_sentences)
-
