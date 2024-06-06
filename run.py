@@ -18,4 +18,5 @@ def build_dataset():
 
 if __name__ == '__main__':
     english_sentences, italian_sentences = get_sentences()
-    tokenize_sentences(english_sentences, italian_sentences)
+    en_train_token, it_train_token, en_val_token, it_val_token, en_test_token, it_test_token = tokenize_sentences(
+        english_sentences, italian_sentences)
