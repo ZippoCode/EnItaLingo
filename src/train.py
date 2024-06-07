@@ -30,3 +30,4 @@ def train_model(tokenized_dataset):
     )
     model.compile(optimizer=optimizer)
     model.fit(x=tf_train_set, validation_data=tf_test_set, epochs=3)
+    model.save_pretrained('checkpoints/enita_lingo')

@@ -2,6 +2,7 @@
 
 ENV_NAME=".venv"
 DATASET_DIR="datasets"
+CHECKPOINTS_DIR="checkpoints"
 
 # Create the virtual environment (overwrite if it exists)
 python3 -m venv $ENV_NAME
@@ -36,6 +37,7 @@ else
 fi
 echo "Languages installed."
 
-# Create the dataset directory if it doesn't exist
+# Create the directories if it doesn't exist
 mkdir -p $DATASET_DIR
-echo "Directory $DATASET_DIR created or already exists."
+mkdir -p $CHECKPOINTS_DIR
+echo "Directories created or already exists."
