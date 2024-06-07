@@ -13,6 +13,12 @@ echo "Virtual environment $ENV_NAME activated."
 pip install -r requirements.txt
 echo "Packages installed from requirements.txt."
 
+# Install tensorflow-metal plug-in
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    pip install tensorflow-metal
+        echo "Plug-in tensorflow-metal installed."
+fi
+
 # Download Models & Languages
 if python -c "import spacy; spacy.load('en_core_web_sm')" &> /dev/null; then
     echo "spaCy model 'en_core_web_sm' is already installed."
@@ -25,7 +31,7 @@ if python -c "import spacy; spacy.load('it_core_news_sm')" &> /dev/null; then
     echo "spaCy model 'it_core_news_sm' is already installed."
 else
     # Install spaCy model
-    python -m spacy download en_core_web_sm
+    python -m spacy download it_core_news_sm
     echo "spaCy model 'it_core_news_sm' downloaded."
 fi
 echo "Languages installed."
