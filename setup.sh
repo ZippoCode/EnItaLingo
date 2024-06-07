@@ -10,7 +10,7 @@ source $ENV_NAME/bin/activate
 echo "Virtual environment $ENV_NAME activated."
 
 # Install the necessary packages
-pip install -q -r requirements.txt
+pip install -r requirements.txt
 echo "Packages installed from requirements.txt."
 
 # Download Models & Languages

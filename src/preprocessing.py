@@ -1,9 +1,19 @@
 import spacy
+from datasets import Dataset, DatasetDict
 from rich.progress import Progress
 from sklearn.model_selection import train_test_split
 
 en_nlp = spacy.load("en_core_web_sm")
 it_nlp = spacy.load("it_core_news_sm")
+
+
+def split_dataset(source_sentences, target_sentences, test_size=0.2, val_size=0.2, random_state=None):
+    assert len(source_sentences) == len(target_sentences), "Source and target sentences must have the same length"
+    en_train, en_test, it_train, it_test = train_test_split(source_sentences, target_sentences, test_size=test_size,
+                                                            random_state=random_state)
+    en_test, en_val, it_test, it_val = train_test_split(en_test, it_test, test_size=val_size / (1 - test_size),
+                                                        random_state=random_state)
+    return en_train, it_train, en_test, it_test, en_val, it_val
 
 
 def get_tokens(sentence, nlp):
@@ -54,3 +64,16 @@ def tokenize_sentences(english_sentences, italian_sentences, test_size=0.2, val_
     print("Tokenizing test sentence ...")
     en_test_token, it_test_token = get_tokenized_sentences(en_test, it_val)
     return en_train_token, it_train_token, en_val_token, it_val_token, en_test_token, it_test_token
+
+
+def build_dataset_dict(source_sentences, target_sentences):
+    en_train, it_train, en_test, it_test, en_val, it_val = split_dataset(source_sentences, target_sentences)
+    train_dataset = Dataset.from_dict({"en": en_train, "it": it_train})
+    val_dataset = Dataset.from_dict({"en": en_val, "it": it_val})
+    test_dataset = Dataset.from_dict({"en": en_test, "it": it_test})
+
+    return DatasetDict({
+        'train': train_dataset,
+        'test': test_dataset,
+        'validation': val_dataset
+    })
