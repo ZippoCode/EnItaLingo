@@ -73,7 +73,7 @@ def build_dataset_dict(source_sentences, target_sentences):
     test_dataset = Dataset.from_dict({"en": en_test, "it": it_test})
 
     return DatasetDict({
-        'train': train_dataset,
-        'test': test_dataset,
+        'training': train_dataset,
+        'testing': test_dataset,
         'validation': val_dataset
     })

@@ -24,7 +24,7 @@ def build_dataset():
 
 
 def preprocess_function(examples):
-    return tokenizer(examples["en"], text_target=examples["it"], max_length=128, truncation=True)
+    return tokenizer(examples["en"], text_target=examples["it"], max_length=128, truncation=True, padding=True)
 
 
 def postprocess_text(predictions, labels):
