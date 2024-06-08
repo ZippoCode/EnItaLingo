@@ -16,7 +16,7 @@ echo "Packages installed from requirements.txt."
 
 # Install tensorflow-metal plug-in
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    pip install tensorflow-metal
+    pip install tensorflow-metal==0.4.0
         echo "Plug-in tensorflow-metal installed."
 fi
 

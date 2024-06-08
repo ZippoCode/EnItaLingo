@@ -1,6 +1,7 @@
 datasets==2.19.2
 evaluate==0.4.2
 numpy==1.26.4
+python-dotenv==1.0.1
 rich==13.7.1
 sacrebleu==2.4.2
 sentencepiece==0.2.0

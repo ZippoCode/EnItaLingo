@@ -1,14 +1,22 @@
+import os
+
+from dotenv import load_dotenv
+
 from src.download_datasets import get_sentences
-from src.predict import predict
-from src.preprocessing import build_dataset_dict
-from src.train import train_model
-from src.utils import preprocess_function
+from src.enita_lingo_hf import train_model, predict
+
+train = True
 
 if __name__ == '__main__':
+    load_dotenv()
+    checkpoint = os.getenv('CHECKPOINT')
+    checkpoint_path = os.getenv('CUSTOM_CHECKPOINT')
+
     english_sentences, italian_sentences = get_sentences()
-    english_sentences = english_sentences[:100]
-    italian_sentences = italian_sentences[:100]
-    dataset_dict = build_dataset_dict(english_sentences, italian_sentences)
-    tokenized_dataset = dataset_dict.map(preprocess_function, batched=True)
-    # train_model(tokenized_dataset)
-    predict("Sentence of proof", 'checkpoints/enita_lingo')
+    english_sentences = english_sentences[:10000]
+    italian_sentences = italian_sentences[:10000]
+    if train:
+        train_model(english_sentences, italian_sentences)
+    english_sentence = "This is a sentence because I want to learn how to build a new skill"
+    italian_sentence = predict(english_sentence, checkpoint)
+    print(italian_sentence)
