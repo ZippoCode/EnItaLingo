@@ -20,23 +20,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         echo "Plug-in tensorflow-metal installed."
 fi
 
-# Download Models & Languages
-if python -c "import spacy; spacy.load('en_core_web_sm')" &> /dev/null; then
-    echo "spaCy model 'en_core_web_sm' is already installed."
-else
-    # Install spaCy model
-    python -m spacy download en_core_web_sm
-    echo "spaCy model 'en_core_web_sm' downloaded."
-fi
-if python -c "import spacy; spacy.load('it_core_news_sm')" &> /dev/null; then
-    echo "spaCy model 'it_core_news_sm' is already installed."
-else
-    # Install spaCy model
-    python -m spacy download it_core_news_sm
-    echo "spaCy model 'it_core_news_sm' downloaded."
-fi
-echo "Languages installed."
-
 # Create the directories if it doesn't exist
 mkdir -p $DATASET_DIR
 mkdir -p $CHECKPOINTS_DIR

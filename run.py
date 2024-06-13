@@ -1,22 +1,25 @@
-import os
+import sys
 
-from dotenv import load_dotenv
+import spacy
 
-from src.download_datasets import get_sentences
-from src.enita_lingo_hf import train_model, predict
+from src.dataset_utils import load_train_test_datasets
+from src.utils import download_hugging_face_sentences, save_sentences_to_files
 
-train = True
+en_nlp = spacy.load("en_core_web_sm")
+it_nlp = spacy.load("it_core_news_sm")
+
+
+def download_and_store_sentences():
+    datasets_names = ["Helsinki-NLP/europarl", "Helsinki-NLP/opus-100", "Helsinki-NLP/opus_books"]
+    english_sentences, italian_sentences = download_hugging_face_sentences(datasets_names)
+    save_sentences_to_files(english_sentences, italian_sentences)
+
+
+def prepare_datasets():
+    source_path = "datasets/english_sentences.txt"
+    target_path = "datasets/italian_sentences.txt"
+    train_dataset, test_dataset = load_train_test_datasets(source_path, target_path)
+
 
 if __name__ == '__main__':
-    load_dotenv()
-    checkpoint = os.getenv('CHECKPOINT')
-    checkpoint_path = os.getenv('CUSTOM_CHECKPOINT')
-
-    english_sentences, italian_sentences = get_sentences()
-    english_sentences = english_sentences[:10000]
-    italian_sentences = italian_sentences[:10000]
-    if train:
-        train_model(english_sentences, italian_sentences)
-    english_sentence = "This is a sentence because I want to learn how to build a new skill"
-    italian_sentence = predict(english_sentence, checkpoint)
-    print(italian_sentence)
+    sys.exit()
