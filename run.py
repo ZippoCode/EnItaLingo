@@ -1,12 +1,11 @@
 import sys
 
-import spacy
+import tensorflow as tf
 
+from src import EnitaLingo
+from src.EnitaLingo import EnitaLingo
 from src.dataset_utils import load_train_test_datasets
 from src.utils import download_hugging_face_sentences, save_sentences_to_files
-
-en_nlp = spacy.load("en_core_web_sm")
-it_nlp = spacy.load("it_core_news_sm")
 
 
 def download_and_store_sentences():
@@ -18,8 +17,13 @@ def download_and_store_sentences():
 def prepare_datasets():
     source_path = "datasets/english_sentences.txt"
     target_path = "datasets/italian_sentences.txt"
-    train_dataset, test_dataset = load_train_test_datasets(source_path, target_path)
+    train_dataset, test_dataset = load_train_test_datasets(source_path, target_path, max_sentence=1000)
+    translator = EnitaLingo()
+    translator.build_text_vectorization(dataset=train_dataset, max_vocabulary_size=5000)
+    train_ds = train_dataset.map(translator.process_text, tf.data.AUTOTUNE)
+    val_ds = test_dataset.map(translator.process_text, tf.data.AUTOTUNE)
 
 
 if __name__ == '__main__':
+    prepare_datasets()
     sys.exit()
