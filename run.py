@@ -22,7 +22,6 @@ def prepare_datasets(units=256):
     translator.build_text_vectorization(dataset=train_dataset, max_vocabulary_size=5000)
     train_ds = train_dataset.map(translator.process_text, tf.data.AUTOTUNE)
     val_ds = test_dataset.map(translator.process_text, tf.data.AUTOTUNE)
-    translator.build_model()
 
 
 if __name__ == '__main__':
