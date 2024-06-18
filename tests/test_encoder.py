@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 import tensorflow as tf
 
-from src.models.encoder import Encoder
+from src.modules.encoder import Encoder
 
 
 @pytest.fixture(scope="module")

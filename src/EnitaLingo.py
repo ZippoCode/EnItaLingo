@@ -1,7 +1,7 @@
 import tensorflow as tf
 
-from src.models.attention import CrossAttention
-from src.models.encoder import Encoder
+from src.modules.attention import CrossAttention
+from src.modules.encoder import Encoder
 from src.preprocessing_text import tf_normalize_text
 
 

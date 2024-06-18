@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-from src.models.attention import CrossAttention
+from src.modules.attention import CrossAttention
 
 
 class Decoder(tf.keras.layers.Layer):

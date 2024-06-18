@@ -1,7 +1,7 @@
 import pytest
 import tensorflow as tf
 
-from src.models.attention import CrossAttention
+from src.modules.attention import CrossAttention
 
 UNITS = 64
 BATCH_SIZE = 32

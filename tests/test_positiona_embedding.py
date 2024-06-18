@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 import tensorflow as tf
 
-from src.models.embedding import PositionalEmbedding
+from src.modules.embedding import PositionalEmbedding
 
 tf.random.set_seed(42)
 np.random.seed(42)
